@@ -87,7 +87,7 @@ int main() {
     // cout << "Oppg. g\n";
     // primeNumberSearch(10);
     // cout << "Oppg. h\n";
-    // nameAndAge();
+    nameAndAge();
     int age = 10;
     // printf("Jeg er %d år gammel", age);
 

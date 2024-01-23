@@ -106,8 +106,8 @@ void pythgoras() {
 }
 
 int main() {
-    // pythgoras();
-    menu_func();
+    pythgoras();
+    // menu_func();
     // FEILMELDING: Du kan ikke printe en vector direkte: ingen overload for
     // '<<' som tar inn en vektor
     // DEBUGGING: i<=v.size() fører til at i blir for stor i siste iterasjon

@@ -114,19 +114,14 @@ void MastermindWindow::drawGuessesAndFeedbacks() {
          feedbackIndex < static_cast<int>(feedbacks.size()); feedbackIndex++) {
         // Implementer feedback
         y_pos = (3 + 2 * feedbackIndex + 0.5) * padY;
-        for (int i = 0; i < size; i++) {
-            // Tegn sirkler ved hjelp av draw_circle().
-            x_pos = 9 * padX + radCircle;
-            for (int j = 0; j < feedbacks.at(feedbackIndex).correctPosition;
-                 ++j) {
-                draw_circle({x_pos, y_pos}, radCircle, Color::slate_grey);
-                x_pos += 2 * radCircle;
-            }
-            for (int j = 0; j < feedbacks.at(feedbackIndex).correctCharacter;
-                 ++j) {
-                draw_circle({x_pos, y_pos}, radCircle, Color::light_grey);
-                x_pos += 2 * radCircle;
-            }
+        x_pos = 9 * padX + radCircle;
+        for (int j = 0; j < feedbacks.at(feedbackIndex).correctPosition; ++j) {
+            draw_circle({x_pos, y_pos}, radCircle, Color::slate_grey);
+            x_pos += 2 * radCircle;
+        }
+        for (int j = 0; j < feedbacks.at(feedbackIndex).correctCharacter; ++j) {
+            draw_circle({x_pos, y_pos}, radCircle, Color::light_grey);
+            x_pos += 2 * radCircle;
         }
     }
 }

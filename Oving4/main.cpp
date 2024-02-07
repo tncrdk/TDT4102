@@ -18,13 +18,13 @@ int main() {
     // tests::testStudentStruct();
 
     // Oppg. 3
-    // tests::testString();
+    tests::testString();
 
     // Oppg. 4
     // mastermind::playMastermind();
 
     // Oppg. 5
-    playMasterVisual();
+    // playMasterVisual();
 }
 
 // 1a) 5, 10, 25

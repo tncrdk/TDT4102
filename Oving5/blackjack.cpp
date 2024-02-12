@@ -1,4 +1,3 @@
-#pragma once
 #include "blackjack.h"
 #include "card.h"
 #include <iostream>

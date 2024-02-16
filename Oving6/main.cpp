@@ -10,7 +10,7 @@ void linenumbers(std::ofstream &ostream, std::ifstream &istream);
 const map<string, string> capitalsMap{
     {"Norway", "Oslo"}, {"Sweden", "Stockholm"}, {"Denmark", "Copenhagen"}};
 
-// Må ha .at()
+// Må ha .at() siden mappet er const
 string getCapital(const string &country) { return capitalsMap.at(country); }
 
 int main() {

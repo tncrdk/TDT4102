@@ -15,27 +15,27 @@ string getCapital(const string &country) { return capitalsMap.at(country); }
 
 int main() {
     // Oppg. 1a
-    // std::filesystem::path oppg1_path{"Oppg1.txt"};
-    // std::ofstream output_stream{oppg1_path};
-    // read_and_echo(output_stream);
-    // output_stream.close();
+    std::filesystem::path oppg1_path{"Oppg1.txt"};
+    std::ofstream output_stream{oppg1_path};
+    read_and_echo(output_stream);
+    output_stream.close();
 
     // // b)
-    // std::ofstream output_stream_1{std::filesystem::path{"New_text.txt"}};
-    // std::ifstream input_stream{std::filesystem::path{"Oppg1.txt"}};
-    // linenumbers(output_stream_1, input_stream);
+    std::ofstream output_stream_1{std::filesystem::path{"New_text.txt"}};
+    std::ifstream input_stream{std::filesystem::path{"Oppg1.txt"}};
+    linenumbers(output_stream_1, input_stream);
 
     // Oppg. 2
-    // cout << "Capitals:" << endl;
-    // for (pair<const string, const string> elem : capitalsMap) {
-    //     cout << getCapital(elem.first) << endl;
-    // }
+    cout << "Capitals:" << endl;
+    for (pair<const string, const string> elem : capitalsMap) {
+        cout << getCapital(elem.first) << endl;
+    }
 
     // Oppg. 3
-    // CourseCatalogue::test_course_catalogue();
+    CourseCatalogue::test_course_catalogue();
 
     // Oppg. 4
-    bouncing_ball();
+    // bouncing_ball();
     return 0;
 }
 

@@ -9,7 +9,11 @@ struct Point {
 
 class A {
   public:
-    A(int a, Point b) : a{a}, b{b} { cout << "A: " << &(this->b) << "\n"; }
+    A(int a, Point b) : a{a}, b{b} {
+        cout << "A (b): " << &(this->b) << "\n";
+        cout << "A (a): " << &(this->a) << "\n";
+        cout << "A (this): " << this << "\n";
+    }
 
     void print() {
         cout << "a: " << a << "\nb.x: " << b.x << ", b.y: " << b.y
@@ -26,7 +30,9 @@ class A {
 class B : public A {
   public:
     B(int a, Point b, int c, int d) : A{a, b}, c(c), d(d) {
-        cout << "B: " << &(this->b) << "\n";
+        cout << "B (b): " << &(this->b) << "\n";
+        cout << "B (a): " << &(this->a) << "\n";
+        cout << "B (this): " << this << "\n";
     }
     B(int a, Point b) : B(a, b, 3, 4) {}
 
@@ -44,7 +50,9 @@ class B : public A {
 class C : public A {
   public:
     C(int a, Point b, int c, int d) : A{a, b}, c(c), d(d) {
-        cout << "C: " << &(this->b) << "\n";
+        cout << "C (b): " << &(this->b) << "\n";
+        cout << "C (a): " << &(this->a) << "\n";
+        cout << "C (this): " << this << "\n";
     }
     C(int a, Point b) : C(a, b, 3, 4) {}
 

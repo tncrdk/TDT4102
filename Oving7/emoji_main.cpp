@@ -12,11 +12,27 @@ int main() {
     const string win_label{"Emoji factory"};
     AnimationWindow win{tl.x, tl.y, xmax, ymax, win_label};
 
-    Point centre{xmax / 2, ymax / 2};
-    emoji::EmptyFace f(100, centre, 10, Point{20, 20});
-    // cout << "Out: " << f.centre.x << "\n";
-    cout << centre.x << "\n";
-    f.draw(win);
+    // std::vector<emoji::Emoji *> emojis{
+    //     new emoji::EmptyFace(50, Point{100, 100}),
+    //     new emoji::SmileyFace(50, Point{200, 100}),
+    //     new emoji::LaughingFace(50, Point{300, 100}),
+    // };
+    // for (std::vector<emoji::Emoji *>::iterator f = emojis.begin();
+    //      f != emojis.end(); ++f) {
+    //     (*f)->draw(win);
+    // }
+
+    vector<unique_ptr<emoji::Emoji>> emojis;
+    emojis.emplace_back(new emoji::SmileyFace(50, Point{100, 100}));
+    emojis.emplace_back(new emoji::LaughingFace(50, Point{200, 100}));
+    emojis.emplace_back(new emoji::AngryFace(50, Point{300, 100}));
+    emojis.emplace_back(new emoji::SadFace(50, Point{400, 100}));
+    emojis.emplace_back(new emoji::SurprisedFace(50, Point{500, 100}));
+
+    for (std::vector<unique_ptr<emoji::Emoji>>::iterator f = emojis.begin();
+         f != emojis.end(); ++f) {
+        (*f)->draw(win);
+    }
 
     win.wait_for_close();
 

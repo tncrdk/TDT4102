@@ -29,10 +29,10 @@ src = []
 exe = executable(
   'program',
   src,
-'Emoji.cpp',
-'animal.cpp',
-# 'emoji_main.cpp',
 'main.cpp',
+'meeting.cpp',
+'meetingWindow.cpp',
+'objects.cpp',
   dependencies : [animationwindow_dep, sdl2_dep],
   cpp_args : compiler_flags
 )

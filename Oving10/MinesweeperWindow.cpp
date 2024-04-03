@@ -127,8 +127,8 @@ void MinesweeperWindow::cb_restart() {
         }
     }
     is_done = false;
-    flags = mines;
-    mines_remaining.setText(to_string(flags));
+    flags = 0;
+    mines_remaining.setText(to_string(mines));
     msg.setVisible(false);
     quit.setVisible(false);
     restart.setVisible(false);
@@ -172,6 +172,9 @@ void MinesweeperWindow::loss_state() {
     for (int i = 0; i < height; ++i) {
         for (int j = 0; j < width; ++j) {
             Tile *tile = tiles.at(i * width + j).get();
+            if (tile->getState() == Cell::flagged) {
+                tile->flag();
+            }
             tile->open();
         }
     }

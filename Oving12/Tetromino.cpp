@@ -16,13 +16,11 @@ const std::map<TetrominoType, std::vector<std::vector<int>>> initialMatrixMap{
     {TetrominoType::T, {{0, 1, 0}, {1, 1, 1}, {0, 0, 0}}},
 };
 
-Tetromino::Tetromino() : matrixSize{0}, topLeftCorner{TDT4102::Point{0, 0}} {
-    // throw std::logic_error("Should not be called!!!");
-}
+Tetromino::Tetromino() : matrixSize{0}, topLeftCorner{TDT4102::Point{0, 0}} {}
 
 Tetromino::Tetromino(TDT4102::Point startingPoint, TetrominoType tetType)
     : topLeftCorner{startingPoint},
-      matrixSize{initialMatrixMap.at(tetType).size()}, tetType{tetType} {
+      matrixSize{int(initialMatrixMap.at(tetType).size())}, tetType{tetType} {
 
     blockMatrix.resize(matrixSize);
     std::vector<std::vector<int>> m = initialMatrixMap.at(tetType);

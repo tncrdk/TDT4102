@@ -30,11 +30,19 @@ void TetrisWindow::run() {
             move_down();
         }
         handleInput();
+        if (has_lost) {
+            break;
+        }
 
         draw_current_tetromino();
+        remove_full_rows();
 
         next_frame();
     }
+    draw_text(
+        TDT4102::Point{win_width / 3 * block_size, win_height / 2 * block_size},
+        "YOU LOST", TDT4102::Color::red, win_width * block_size / 10);
+    wait_for_close();
 }
 
 void TetrisWindow::handleInput() {
@@ -130,7 +138,7 @@ void TetrisWindow::move_down() {
     }
 }
 
-bool TetrisWindow::is_within_bounds(Tetromino &t) const {
+bool TetrisWindow::is_within_bounds(Tetromino &t) {
     int x = 0;
     int y = 0;
     TDT4102::Point pos = t.get_position();
@@ -148,7 +156,7 @@ bool TetrisWindow::is_within_bounds(Tetromino &t) const {
     return true;
 }
 
-bool TetrisWindow::has_collided(Tetromino &t) const {
+bool TetrisWindow::has_collided(Tetromino &t) {
     int x = 0;
     int y = 0;
     TDT4102::Point pos = t.get_position();
@@ -181,13 +189,54 @@ void TetrisWindow::draw_current_tetromino() {
                 draw_rectangle(
                     pos, current_tetromino.blockSize,
                     current_tetromino.blockSize,
-                    something_random_color_map.at(current_tetromino.tetType));
+                    tetromino_color_map.at(current_tetromino.tetType),
+                    TDT4102::Color::grey);
             }
         }
     }
 }
 
-void TetrisWindow::handle_collision(Tetromino &t) {}
+void TetrisWindow::handle_collision(Tetromino &t) {
+    fasten_tetromino(t);
+    generate_rand_tetromino();
+    if (has_collided(current_tetromino)) {
+        has_lost = true;
+    }
+}
+
+void TetrisWindow::fasten_tetromino(Tetromino &t) {
+    int size = t.get_matrix_size();
+    int x, y;
+    for (int i = 0; i < size; ++i) {
+        for (int j = 0; j < size; ++j) {
+            TDT4102::Point pos = t.get_position();
+            x = pos.x + j;
+            y = pos.y + i;
+            std::cout << "x: " << x << "\ny:" << y << "\n";
+            if (t.get_block(i, j) != TetrominoType::NONE) {
+                grid_matrix.at(y).at(x) = t.get_block(i, j);
+            }
+        }
+    }
+}
+
+void TetrisWindow::remove_full_rows() {
+    bool full;
+    for (int i = 0; i < win_height; ++i) {
+        full = true;
+        for (int j = 0; j < win_width; ++j) {
+            if (grid_matrix.at(i).at(j) == TetrominoType::NONE) {
+                full = false;
+            }
+        }
+        if (full) {
+            grid_matrix.erase(grid_matrix.begin() + i);
+            grid_matrix.insert(
+                grid_matrix.begin(),
+                std::vector<TetrominoType>(win_width, TetrominoType::NONE));
+        }
+    }
+}
 
 void TetrisWindow::draw_grid() {
     int x = 0;
@@ -196,8 +245,9 @@ void TetrisWindow::draw_grid() {
         for (int j = 0; j < win_width; ++j) {
             x = j * block_size;
             y = i * block_size;
+            TetrominoType t = grid_matrix.at(i).at(j);
             draw_rectangle(TDT4102::Point{x, y}, block_size, block_size,
-                           TDT4102::Color::white, TDT4102::Color::grey);
+                           tetromino_color_map.at(t), TDT4102::Color::grey);
         }
     }
 }

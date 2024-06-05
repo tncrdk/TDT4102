@@ -1,19 +1,14 @@
 #include "std_lib_facilities.h"
 #include <memory>
 
-class A {
-  private:
-    int a;
+enum class PaintColour { Red, Yellow, Blue };
 
-  public:
-    A(int a) : a{a} {}
-    void print() { cout << a << "\n"; }
-    ~A() { cout << "DESTROY!!!!!\n"; }
-};
+void printNumber(PaintColour colour) {
+    cout << static_cast<int>(colour) << endl;
+}
 
 int main() {
-    A a(3);
-    shared_ptr<A> A_ptr = shared_ptr<A>(&a);
-    A_ptr->print();
+    PaintColour paint = 1;
+    printNumber(paint);
     return 0;
 }
